@@ -1,0 +1,64 @@
+camel:    
+    dataformat:
+        json-jackson:
+            pretty-print: true
+    springboot:
+        main-run-controller: true
+        name: HomeDockerMocks
+config:
+    max-retry: ${API_RETRIES:1}
+    redelivery-timeout-millis: ${API_TIMEOUT:1000}
+    minha-variavel: ${minha-variavel:""Não encontrou no ambiente"}
+    api-govbr:        
+        ENDPOINT_AUTHORIZE: ${ENDPOINT_AUTHORIZE:https://sso.staging.acesso.gov.br/authorize}
+        ENDPOINT_LOGOUT: ${ENDPOINT_LOGOUT:https://jboss-dev.fazenda.rj.gov.br/SCAService/api/logout}
+        ENDPOINT_SCA_SERVICE_URL_PROCESSLOGOUT: ${ENDPOINT_SCA_SERVICE_URL_PROCESSLOGOUT:https://jboss-dev.fazenda.rj.gov.br/SCAService/api/processlogout?navegacao=%s&sistema=%s}
+        ENDPOINT_LOGIN: ${ENDPOINT_LOGIN:https://localhost:8443/SCAService/api/login?navegacao=%s&sistema=%s}
+        SCOPE: ${SCOPE:openid+email+phone+profile+govbr_confiabilidades+govbr_empresa}
+        CLIENT_ID: ${CLIENT_ID:atendimentodigitalrj-dev.fazenda.rj.gov.br}
+        REDIRECT_SCA_SERVICE_URL: ${REDIRECT_SCA_SERVICE_URL:https://jboss-dev.fazenda.rj.gov.br/SCAService/api/authorize}
+        ENDPOINT_JWK: ${ENDPOINT_JWK:https://sso.staging.acesso.gov.br/jwk}
+        TOKEN_ISSUER: ${TOKEN_ISSUER:https://sso.staging.acesso.gov.br/}
+        ENDPOINT_TOKEN: ${ENDPOINT_TOKEN:https://sso.staging.acesso.gov.br/token}
+        INTROSPECT_TOKEN: ${INTROSPECT_TOKEN:https://sso.staging.acesso.gov.br/token/instrospect}
+        ENDPOINT_NIVEIS: ${ENDPOINT_NIVEIS:https://api.staging.acesso.gov.br/confiabilidades/v3/contas/%s/niveis?response-type=ids}
+        ENDPOINT_CATEGORIAS: ${ENDPOINT_CATEGORIAS:https://api.staging.acesso.gov.br/confiabilidades/v3/contas/%s/categorias?response-type=ids}
+        ENDPOINT_CONFIABILIDADES: ${ENDPOINT_CONFIABILIDADES:https://api.staging.acesso.gov.br/confiabilidades/v3/contas/%s/confiabilidades?response-type=ids}
+        ENDPOINT_EMPRESAS: ${ENDPOINT_EMPRESAS:https://api.staging.acesso.gov.br/empresas/v2/empresas?filtrar-por-participante=%s}
+        ENDPOINT_EMPRESAS_DADOS: ${ENDPOINT_EMPRESAS_DADOS:https://api.staging.acesso.gov.br/empresas/v2/empresas/%s/participantes/%s}
+        ENDPOINT_LOGOUT_RH_SSO: ${ENDPOINT_LOGOUT_RH_SSO:https://sso.staging.acesso.gov.br/logout?post_logout_redirect_uri=%s}
+        ENDPOINT_CATALOGO: ${ENDPOINT_CATALOGO:https://confiabilidades.staging.acesso.gov.br}
+        SECRET: ${SECRET:b6HYoZ8FTWr1Hf4J8ffirW_aZYFC90PnespnCCiBhAnbBK1y_QxNpYTF2ms9QK81AkWSiqA3shUXriOq4RJs}
+        FILA_SCA_SERVICE_IN: ${FILA_SCA_SERVICE_IN:jms:queue:INTEGRADOR_GOVBR_IN}
+        MEMCACHED_URL: ${MEMCACHED_URL:d-rhel7-jboss7-master.sefnet}
+        key: ${key:Kyw95542Gql81391}
+        apiKey: ${apiKey:Gyw42988Hmn23134}
+server:
+    servlet:
+        context-path: ${SERVER_SERVLET_CONTEXT_PATH:/}
+logging:
+    level:
+        root: ${LOGGIN_LEVEL:DEBUG}
+        org.apache.http: ${LOGGIN_LEVEL:DEBUG}
+        httpclient.wire: ${LOGGIN_LEVEL:DEBUG}
+        web: ${LOGGIN_LEVEL:DEBUG}
+        br.gov.rj.sefaz.services.api: ${LOGGIN_LEVEL:DEBUG}
+    pattern:
+        console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+spring:
+    debug: false
+    application:
+        name: homedoctormocks
+    cloud:
+        kubernetes:
+            reload:
+                enabled: true
+    http:
+        encoding:
+            charset: UTF-8
+    info:
+        build:
+            encoding: UTF-8
+    jackson:
+        time-zone: America/Sao_Paulo
+    mandatory-file-encoding: UTF-8
